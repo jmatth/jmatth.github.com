@@ -1,0 +1,55 @@
+---
+layout: post
+title: "Managing Dotfiles With Git"
+date: 2012-10-27 22:30
+comments: true
+categories: [git, dotfiles]
+---
+###All the cool kids are doing it.
+
+As a Linux user, one of the great things is how much everything on the system
+can be customized exactly to your liking, and how easy it is to do so through
+(usually) simple plain-text config files. One not-so-great thing is having to
+copy those files around whenever you get access to a new machine and want all
+your nice customizations on there too, or even worse, loosing all those careful
+tweaks in a system reinstall.
+
+Fortunately there is a better way. By using git to manage all your
+configuration files ("dotfiles", since they are usually prefixed with a `.`),
+you can store all your settings remotely and easily sync them across any number
+of computers. Even if you're fairly new to Linux and don't have much in the way
+of dotfiles, keeping whatever you do have in git is still a good idea because 1)
+Even if you don't have a lot now, you will eventually so might as well start
+early, and 2) No matter how little configuration you might have, having to
+retype it after a system reinstall is never fun, so keeping it in a safe place
+just makes sense. So with that in mind, lets get started.
+
+<!-- more -->
+
+Before we start, I'm assuming you have git installed and a github account ready to
+go. If not, then you should register for a free account
+[here](https://github.com/signup/free). It's a great website for hosting your
+git repos, and if you're a student you can even get a few free private repos to
+store all your secrets. Once you create an account, just run through the super
+easy instructions to get git set up on your machine.
+
+To get started, go to your github and create a new repo name *dotfiles*, and
+clone it to your local machine. Now to start out, lets just add one file to the
+repo. If you have a bashrc, then I'd recommend starting with that. Copy the file
+`.bashrc` from your home directory to `dotfiles/bashrc`. I'm omitting the `.`
+on purpose in the repo, because having it hidden in a repository used for
+nothing but dotfiles doesn't make much sense. Once it's there you can add to the
+repo with `git add bashrc` and `git commit -m `adding bashrc.`. Finally, push
+the changes to github to access your bashrc from anywhere with an internet
+connection.
+
+So now you can take any other configuration files you have, add them to the
+repo, and pull them down to any other computers you use. Of course, now you have
+to copy all your files back into your home directory each time you pull down new
+changes. That, or you could use a shell script to create symlinks for each
+file so that whenever you run `git pull` you don't have to do any extra work.
+Just copy or download the following script into a file called `link.sh`, make it executable,
+and add it to the repo. Then whenever you add new files, just run `./link.sh`
+inside the repo to create matching symlinks in your home directory.
+
+{% include_code Create Dotfiles Symlinks dots-pt1/link.sh %}
