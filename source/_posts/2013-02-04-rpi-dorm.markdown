@@ -1,0 +1,331 @@
+---
+layout: post
+title: "Raspberry Pi In The Dorm"
+date: 2013-02-18 12:00
+comments: true
+categories: [Raspberry Pi, College, Dorm, SSH]
+---
+##Using a Raspberry Pi single board computer as a dorm room command center.
+
+Some time ago I bought a [Raspberry Pi](http://www.raspberrypi.org/), and once
+the initial excitement of setting up the new system wore off, I realized that I
+had absolutely no plans thought out on what to use it for. Well rather than let
+such an interesting new device go to waste, I set about thinking of things I
+might want to implement on my dorm network, and eventually digging through my
+spare parts bin to see what unused electronics I might be able to use in the
+projects. Listed in this post are my three favorite uses that I came up with for
+the Pi on my dorm network, and instructions on how to implement them yourself.
+
+<!--more-->
+
+---
+
+<a id="top"></a>
+**Warning!** This is a long post. For your convenience here are some links to
+jump by section:
+
+1. [Reverse SSH Tunnel](#tunnel)
+2. [Networked Attached Storage](#nas)
+3. [Deluge Torrent Daemon](#deluge)
+
+---
+<br />
+
+###<a id="tunnel"></a>Bypass Dorm NAT With a Reverse SSH Tunnel
+The first thing I wanted to do was setup a way to access the Pi via SSH from
+outside my dorm, which presented the first problem: all the IP addresses in my
+dorm (and indeed most dorms) are behind a
+[NAT](http://en.wikipedia.org/wiki/Network_address_translation) system. For
+anyone who isn't familiar with this, the short explanation is that all the
+connections inside the dorm share the same external IP address, and as a
+consequence of this I couldn't just forward port 22 to my Pi. Fortunately, this
+problem can be easily solved with a small script and some SSH magic.
+
+In order to carry out this fix, you'll need access to an eternal server that you
+are already able to SSH into. In many cases, you could already have this through
+your school, such as in my case where I had SSH access to both several machines
+in the computer science computer lab, and the campus email server. If you check
+and determine that your school does not provide any SSH access, I'd recommend
+watching [Low End Box](http://www.lowendbox.com/) and renting the cheapest VPS
+you can find. We don't need anything powerful, it's essentially just going to
+act as a proxy.
+
+Once you determine the server you'll use to act as a proxy, the next step is to
+enable public key access so that we can automate the connection later. Since
+we'll need the privte key to be unencrypted, you should generate new
+public/private key pair specifcally for this purpose (because I know everyone
+reading this practices good security and would normally put a passphrase on
+their private key, right? ಠ\_ಠ). For our purposes, lets name this new key
+`tun_rsa`:
+
+```console bash
+you@raspberrypi: ~$ ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/you/.ssh/id_rsa): /home/you/.ssh/tun_rsa
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /home/you/.ssh/tun_rsa.
+Your public key has been saved in /home/you/.ssh/tun_rsa.pub.
+The key fingerprint is:
+cd:d5:12:84:a8:7c:4e:ff:e0:e2:af:fa:4a:02:1a:ad you@raspberrypi
+The key's randomart image is:
++--[ RSA 2048]----+
+|         . oo    |
+|        . .  o   |
+|     . .    o .  |
+| .    o oo . .   |
+|. o    +S.o      |
+| + .    . o      |
+|E   . .  . o     |
+|     o  . . .    |
+|      o=++.      |
++-----------------+
+```
+Now, install the key on the proxy server with `ssh-keygen -i .ssh/tun\_rsa.pub
+you@proxy`. For security, you should also add the commands
+`command="/bin/false",no-pty` in front of the key entry in authorized_keys on
+the proxy server, like so (key shortened for readability):
+
+``` text ~/.ssh/authorized_keys
+command="/bin/false",no-pty ssh-rsa AAAAB3Nz...GCBNc6P you@raspberrypi
+```
+
+This will prevent us from executing any commands on the server when logging in
+with this key, but still allow us to create the reverse tunnel we're working
+towards.
+
+You should also add the following line to your ssh config file on the proxy
+server to prevent SSH from yelling at you for unrecognized keys:
+
+```text ~/.ssh/config
+Host localhost
+	StrictHostKeyChecking no
+	UserKnownHostsFile /dev/null
+```
+
+We're almost there, all that's left is a dependency and the shell script.
+Install the package `autossh` on your Pi with `sudo apt-get update && sudo
+apt-get install autossh`. This is a nifty little program that will attempt to
+restart your ssh connections if they die. Last, copy the following shell script
+into the directory `/etc/network/if-up.d` and make it executable.
+
+{% include_code Reverse SSH Tunnel rpi-dorm/reverse_tun.sh %}
+
+Change the variables at the top of the file to match your information. For the
+port number, you can choose anything above 1024 (only root can allocate ports
+below that), but I'd recommend choosing something above ten thousand, especially
+if you are using a university computer that others have access to as your proxy.
+That way there is less chance of someone else trying to use the same port.
+
+So now we have set up the Raspberry Pi to automatically create a reverse SSH
+tunnel whenever it connects to the internet. How we are able to utilize it
+depends on what type of you were able to use as a proxy server. If you rented a
+VPS or are using some other server that you have root permissions on, then you
+can just enable `GatewayPorts` in `/etc/ssh/sshd\_config` and ssh directly to
+that port. So if you decided to set the tunnel to use port `12345` on
+`proxyhost` and you are able to enable `GatewayPorts`, then you can just type
+`ssh -p 12345 you@proxyhost` and it will be as if you were SSHing directly into
+the Pi. If however, you opted to use a server controlled by your school, then
+there are a few more steps that must be taken.
+
+To actually utilize the tunnel and access the Pi using a proxy server without
+gateway ports enabled, there are two possible routes to take. In the first one,
+we first SSH into the server being used as a proxy, and then SSH from there into
+the Pi.  For example, if you choose `proxyhost` to host the tunnel on port
+`12345`, you would do something like:
+
+```console bash
+you@laptop: ~$ ssh you@proxyhost
+you@proxyhost's password: <Enter Password>
+you@proxyhost: ~$ ssh -p 12345 you@localhost
+you@localhost's password: <Enter Raspberry Pi Password>
+you@raspberrypi: ~$
+```
+
+The second option is to define a proxy command in your local ssh config files to
+make the process of connecting to the Pi a bit more direct. Add these lines to
+the ssh config files on whichever machines you intend to remotely access the Pi
+from:
+
+```text ~/.ssh/config
+Host rpi.dorm
+	Proxycommand ssh you@proxyhost exec nc localhost 12345
+```
+
+What this does is tell SSH to run [netcat](http://linux.die.net/man/1/nc) on the
+proxy server to bridge the connections. You'll still need your login credentials
+for both the proxy and the Pi, but the connection process will seem a lot more
+seamless, especially if you use pubkeys instead of passwords for access. Also,
+configuring the connection like this will allow you to use other SSH features
+such as scp and sftp to copy files directly between your local machine and the
+Pi, instead of first having to copy them to the proxy server. So you can do `scp
+somefile rpi.dorm:` and it will just work.
+
+So now that we can access the Pi from anywhere, what are we going to do with it?
+Well I use it to send
+[magic packets](http://en.wikipedia.org/wiki/Wake-on-LAN#Magic_packet) to my
+desktop so when I need to access it for something, and for accessing files that
+I have stored on the Pi using...
+
+
+[Back to top ↑](#top)
+###<a id="nas"></a>Network Attached Storage With an External Drive
+
+If you use more than a single computer on a network, it can often be convenient
+if you have a networked drive that they can all access, whether it's to store
+your media collection, documents, or just for transferring files. Unfortunately,
+dedicated devices to run this type of service are usually expensive, so as an
+alternative I decided to use my Raspberry Pi to host network storage using Samba
+and an extra 500G USB hard drive I had lying around.
+
+To create this setup, first format the hard drive with a Linux file system if it
+doesn't already have one, but make sure to back up anything you might want off
+of it first. Next, attach it to the Pi via USB. If the drive doesn't have it's
+own power supply, you may need to use a powered USB hub, since the ports on the
+Pi don't seem adequate for drives that run on USB power alone. Next, create a
+directory where you wish to access the drive and mount it there, like so:
+
+``` console bash
+you@raspberrypi: ~$ sudo mkdir /nas
+you@raspberrypi: ~$ sudo mount /dev/sda1 /nas
+```
+
+Replace the path `/nas` to your liking, and change `/dev/sda1` to the path to
+the partition you want to use.
+
+To have it mount automatically at boot, add the following line to the bottom of
+`/etc/fstab`:
+
+``` text
+/dev/sda1       /nas            ext4    exec,user,auto,rw 0       0
+```
+Again, be sure to change the paths if they're different on your system.
+
+Next, we need to install Samba, a program that will allow us to host directories
+as Windows share drives. Install it with `sudo apt-get install -y samba`. Once
+it is done installing, cd into /etc/samba and backup the default config with
+`sudo cp smb.conf smb.conf.bak`. Then open smb.conf with your editor and make
+uncomment the line that says `security = user`. This will make it use your Pi
+login information for accessing the network drive. Finally, go down to the
+bottom of the file and add this section:
+
+``` ini smb.conf
+[pi_nas]
+	comment = RPI NAS
+	path = /nas
+	valid users = @users
+	force group = users
+	create mask = 0660
+	directory mask = 0771
+	read only = no
+```
+
+Obviously you should replace /nas with the path to your mountpoint if you used
+something different.
+
+Once you have the configs sorted out, start/restart the samba server with `sudo
+service samba restart`. You can now mount the folder as a windows share drive at
+`\\<Raspberry Pi>\pi_nas` from any other computers on the network. You can then
+use it to store any files you want to access from multiple devices on the
+network. Personally, I used it to store some of my music collection, and as the
+storage location for the next trick.
+
+[Back to top ↑](#top)
+
+###<a id="deluge"></a>Deluge as a Centralized Torrent Daemon
+
+For all the bad press it gets from it's use digital piracy, BitTorrent is still
+an incredibly useful technology that is used by many developers and virtually
+every major Linux distribution, as well as many independent artists to
+distribute their work across the internet. However, like any peer-to-peer
+technology, BitTorrent is dependent on at least some of those peers actually
+staying online to seed the downloads. This creates a problem for those who want
+to pay it forward by seeding their completed downloads, but are not able to
+leave their computer online 24/7. Fortunately for any Raspberry Pi owners, there
+is a very nice cross-platform BitTorrent client called
+[Deluge](http://deluge-torrent.org/) which is capable as running on the Pi as a
+daemon and seeding for as long as you want it to.
+
+**Side Note**: For all it's nice features, in my experience Deluge is not the
+lightest of BitTorrent clients. It has run fine on just about every x86 computer
+I've ever used it on, but on the Pi it takes noticeably longer to bring up
+torrent information and quite a while to check large files, none if which is
+unexpected giving the Pis much lower processing power. I chose Deluge not for
+it's speed but ease of use and ability to connect to the daemon from a client
+over the network. If you want a blazingly fast and lightweight client, try
+looking at [rtorrent](http://libtorrent.rakshasa.no/), be be prepared to dig
+through lots of documentation and forum posts getting it to work. Now, onward!
+
+To start running deluge as a daemon on your Raspberry Pi, first install the
+required packages with `sudo apt-get install deluged deluge-console`. Once they
+finish installing, we'll need to set some basic options before doing the rest
+from a client. First, you should start the daemon with `deluged`. Once it starts
+up, set a username and password you will use to login from the client with the
+following commands:
+
+```bash
+mkdir -p ~/.config/deluge
+echo "<username>:<password>:10" >> ~/.config/deluge
+```
+
+The number `10` at the end means that you will have full control over the daemon
+from the client, username and password should be self explanatory. One word of
+warning though, the password will remain in that file as plaintext, so if you're
+the type that worries about security you should probably choose a password that
+you don't normally use.
+
+Next, we want to ensure that remote access is in fact enabled. Run the command
+`deluge-console`, and once the interface loads enter the following command:
+
+```text
+config -s allow_remote True
+```
+
+You can then exit the console with `exit`, and restart the daemon with the new
+config with the commands:
+
+```bash
+pkill deluged
+deluged
+```
+
+So now we have a torrent daemon running that accepts remote access from client
+programs. To configure it the rest of the way, you *could* edit the (rather
+unfriendly) config file by hand, but I found it much easier to set the options I
+wanted by using the GUI on the client program. If you haven't already, you
+should install deluge on your local machine via whatever package manager your
+disto uses, or if you're on Windows or Mac, download the appropriate
+[installer](http://dev.deluge-torrent.org/wiki/Download). Once you have it
+installed, start the program and open `Preferences=>Interface`, and ensure that
+Classic Mode is unchecked. Restart the program and this time click on
+`Connection Manager=>Add`, enter the servers IP address and the username and
+password you set earlier, and click `Add` and `Connect`. Once a connection is
+established you can click on `Preferences` once again, only now it will change
+the settings on the server running on the Pi.
+
+From here on out the configuration of the Deluge server via the GUI is pretty
+straight forward, but there are some suggestions I would give on where to start.
+The first thing that should be changed is the default download location in the
+`Downloads` tab. If you followed my guide above to setup an external hard drive
+for NAS, I'd recommend setting it to somewhere in that directory so that you can
+access the downloaded files over the network. If not, just be sure to set the
+location to somewhere with enough space to handle the downloads, preferably an
+external drive of some sort.  You can also set a separate
+directory to move the completed downloads to if you want to keep in progress and
+finished downloads separate. Finally, whether using a NAS setup or not, I would
+advise setting a directory to load .torrents from. If you are mounting a
+directory as NAS, then you can create a subdirectory and have Deluge watch it
+for torrents, so that all you need to do is drop them there from any other
+device to initiate a download. If you're not using NAS, simply set it to
+anywhere that is convenient, and it will still come in handy as a way to add
+torrents directly on the Pi by `wget`ing the torrent files into that directory.
+
+[Back to top ↑](#top)
+
+###Conclusion
+So now we have a Raspberry Pi that will create a reverse SSH tunnel to be
+accessed from anywhere, provide network attached storage to all local devices,
+and act as a central torrent server. Not bad for $35 + spare parts. If you have
+any questions about any of these steps or have a cool trick of your own, leave a
+comment bellow and I'll see about adding it to these tips. Otherwise, enjoy your
+new mini dorm command center.
