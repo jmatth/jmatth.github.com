@@ -7,7 +7,7 @@ body > nav {
     bottom: 1px solid $nav-border-bottom; }
   padding-top: .35em;
   padding-bottom: .35em;
-  @media only screen and (min-width: 768px) {
+  @media only screen and (min-width: 992px) {
     border-bottom-left-radius: $nav-corner-radius;
     border-bottom-right-radius: $nav-corner-radius;
     -moz-border-radius-bottomleft: $nav-corner-radius;

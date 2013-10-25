@@ -139,18 +139,6 @@ body.sidebar-footer {
 @media only screen and (min-width: 768px) {
   body { -webkit-text-size-adjust: auto; }
   body > header { font-size: $header-font-size * 1.2; }
-  #main {
-    margin-top: $main-margin-top;
-	margin-right: auto;
-	margin-left: auto;
-	margin-bottom: 0px;
-	border-top-right-radius: $main-corner-top-radius;
-	border-top-left-radius: $main-corner-top-radius;
-	-moz-border-radius-topleft: $main-corner-top-radius;
-	-moz-border-radius-topright: $main-corner-top-radius;
-    padding: 0;
-    //margin: 0 auto;
-  }
   #content {
     overflow: visible;
     margin-right: $sidebar-width-medium;
@@ -182,6 +170,14 @@ body.sidebar-footer {
 
 @media only screen and (min-width: 992px) {
   body > header { font-size: $header-font-size * 1.3; }
+  #main {
+    border-top-right-radius: $main-corner-top-radius;
+    border-top-left-radius: $main-corner-top-radius;
+    -moz-border-radius-topleft: $main-corner-top-radius;
+    -moz-border-radius-topright: $main-corner-top-radius;
+    padding: 0;
+    margin: $main-margin-top auto 0 auto;
+  }
   #content { margin-right: $sidebar-width-wide; }
   #content {
     > div, > article {
