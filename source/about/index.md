@@ -4,7 +4,7 @@ comments: false
 sharing: true
 footer: false
 ---
-Hi, my name is Josh Matthews, and I am a sophomore studying computer science at
+Hi, my name is Josh Matthews, and I am a junior studying computer science at
 [Rutgers University](http://rutgers.edu).
 
 I am a currently employed as a student systems programmer at
