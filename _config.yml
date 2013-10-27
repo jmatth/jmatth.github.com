@@ -95,6 +95,7 @@ disqus_show_comment_count: true
 
 # Google Analytics
 google_analytics_tracking_id: UA-45165982-2
+google_analytics_site_url: jmatthews.us
 
 # Facebook Like
 facebook_like: false
