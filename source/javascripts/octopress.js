@@ -20,8 +20,10 @@ function addSidebarToggler() {
       e.preventDefault();
       if ($('body').hasClass('collapse-sidebar')) {
         $('body').removeClass('collapse-sidebar');
+        docCookies.removeItem('sidebar_collapsed', '/');
       } else {
         $('body').addClass('collapse-sidebar');
+        docCookies.setItem('sidebar_collapsed', 0, Infinity, '/');
       }
     });
   }
