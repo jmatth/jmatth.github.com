@@ -164,7 +164,7 @@ somefile rpi.dorm:` and it will just work.
 So now that we can access the Pi from anywhere, what are we going to do with it?
 Well, I use it to send
 [magic packets](http://en.wikipedia.org/wiki/Wake-on-LAN#Magic_packet) to my
-desktop to power it on remotely, and to accessing files that I have stored on
+desktop to power it on remotely, and for accessing files that I have stored on
 the Pi using...
 
 
