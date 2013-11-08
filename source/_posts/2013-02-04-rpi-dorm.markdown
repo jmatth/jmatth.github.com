@@ -81,7 +81,7 @@ The key's randomart image is:
 |      o=++.      |
 +-----------------+
 ```
-Now, install the key on the proxy server with `ssh-keygen -i .ssh/tun\_rsa.pub
+Now, install the key on the proxy server with `ssh-copy-id -i .ssh/tun\_rsa.pub
 you@proxy`. For security, you should also add the commands
 `command="/bin/false",no-pty` in front of the key entry in authorized_keys on
 the proxy server, like so (key shortened for readability):
@@ -162,10 +162,10 @@ Pi, instead of first having to copy them to the proxy server. So you can do `scp
 somefile rpi.dorm:` and it will just work.
 
 So now that we can access the Pi from anywhere, what are we going to do with it?
-Well I use it to send
+Well, I use it to send
 [magic packets](http://en.wikipedia.org/wiki/Wake-on-LAN#Magic_packet) to my
-desktop so when I need to access it for something, and for accessing files that
-I have stored on the Pi using...
+desktop to power it on remotely, and to accessing files that I have stored on
+the Pi using...
 
 
 [Back to top ↑](#top)
