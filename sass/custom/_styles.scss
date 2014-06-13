@@ -1,2 +1,16 @@
 // This File is imported last, and will override other styles in the cascade
 // Add styles here to make changes without digging in too much
+
+.img-wrapper {
+  text-align: center;
+  width: auto;
+
+  img {
+    display: block;
+    margin: 0 auto
+  }
+
+  p {
+    color: change-color(mix($text-color, $main-bg, 60), $hue: hue($main-bg), $saturation: saturation($main-bg)/2) !important;
+  }
+}

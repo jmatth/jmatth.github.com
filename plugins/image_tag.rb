@@ -39,7 +39,18 @@ module Jekyll
 
     def render(context)
       if @img
-        "<img #{@img.collect {|k,v| "#{k}=\"#{v}\"" if v}.join(" ")}>"
+        outStr = "<div class=\"img-wrapper flex-content basic-alignment"
+        if @img.has_key? 'class'
+          outStr += " #{@img['class']}\">\n"
+          @img.delete('class')
+        else
+          outStr += "\">\n"
+        end
+        outStr += "<img #{@img.collect {|k,v| "#{k}=\"#{v}\"" if v}.join(" ")}>\n"
+        if @img.has_key? 'title'
+          outStr += "<p>#{@img['title']}</p>\n"
+        end
+        outStr += "</div>"
       else
         "Error processing input, expected syntax: {% img [class name(s)] [http[s]:/]/path/to/image [width [height]] [title text | \"title text\" [\"alt text\"]] %}"
       end
