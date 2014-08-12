@@ -4,14 +4,16 @@ comments: false
 sharing: true
 footer: false
 ---
-Hi, my name is Josh Matthews, and I am a junior studying computer science at
+Hi, my name is Josh Matthews, and I am a senior studying computer science at
 [Rutgers University](http://rutgers.edu).
 
-I am a currently employed as a student systems programmer at
-[Open System Solutions](http://oss.rutgers.edu), where I have worked on a
-variety of projects ranging from web design and development to systems
-programming.  I have also done several independent projects at a number of
-hackathons.
+I am a currently employed as a student systems programmer at [Open System
+Solutions](http://oss.rutgers.edu), where I work on a variety of projects
+ranging from web design and development to system administration. Over the
+summer I interned at [Twilio](http://twilio.com) as an engineer on the platform
+team. The previous summer I interned at [Bitly](http://bit.ly) as part of the
+[HackNY Fellows Program](http://apply.hackny.org), where I worked on the backend
+engineering team.
 
 Listed below are a few of the projects I have worked on, with links to the code
 where available, and my full résumé is available [here](/resume.pdf).
@@ -23,6 +25,14 @@ where available, and my full résumé is available [here](/resume.pdf).
   Besides HTML and CSS for the markup and styling, everything is written in
   JavaScript with [jQuery UI](http://jqueryui.com/) and the jQuery plugin
   [Spectrum](http://bgrins.github.com/spectrum/).
+
+- [LinkTheDots](http://github.com/jmatth/LinkTheDots) -- When I first started
+  keeping my dotfiles in git I wrote a shell script to automatically install
+  them on new machines. As time went on and my setup got more complicated I
+  added more and more features to it, eventually splitting it out into it's own
+  project altogether. Similar projects exist in other languages like Python and
+  Ruby, but since I work on a lot of [legacy systems](bit.ly/1gG0u3y), I needed
+  something that would work with just bash.
 
 - [Movies4L8tr](http://github.com/jmatth/Movies4L8tr) -- A hackathon project at
   the Fall 2012 HackRu. It is a simple website built using
