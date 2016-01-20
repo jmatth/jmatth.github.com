@@ -41,7 +41,7 @@ connections inside the dorm share the same external IP address, and as a
 consequence of this I couldn't just forward port 22 to my Pi. Fortunately, this
 problem can be easily solved with a small script and some SSH magic.
 
-In order to carry out this fix, you'll need access to an eternal server that you
+In order to carry out this fix, you'll need access to an external server that you
 are already able to SSH into. In many cases, you could already have this through
 your school, such as in my case where I had SSH access to both several machines
 in the computer science computer lab, and the campus email server. If you check
@@ -119,11 +119,11 @@ That way there is less chance of someone else trying to use the same port.
 
 So now we have set up the Raspberry Pi to automatically create a reverse SSH
 tunnel whenever it connects to the internet. How we are able to utilize it
-depends on what type of you were able to use as a proxy server. If you rented a
-VPS or are using some other server that you have root permissions on, then you
-can just enable `GatewayPorts` in `/etc/ssh/sshd\_config` and ssh directly to
-that port. So if you decided to set the tunnel to use port `12345` on
-`proxyhost` and you are able to enable `GatewayPorts`, then you can just type
+depends on what type of machine you were able to use as a proxy server. If you
+rented a VPS or are using some other server that you have root permissions on,
+then you can just enable `GatewayPorts` in `/etc/ssh/sshd\_config` and ssh
+directly to that port. So if you decided to set the tunnel to use port `12345`
+on `proxyhost` and you are able to enable `GatewayPorts`, then you can just type
 `ssh -p 12345 you@proxyhost` and it will be as if you were SSHing directly into
 the Pi. If however, you opted to use a server controlled by your school, then
 there are a few more steps that must be taken.
