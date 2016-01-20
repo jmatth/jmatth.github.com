@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: git | Josh Matthews]]></title>
+  <link href="http://jmatthews.us/blog/categories/git/atom.xml" rel="self"/>
+  <link href="http://jmatthews.us/"/>
+  <updated>2016-01-20T16:32:11-05:00</updated>
+  <id>http://jmatthews.us/</id>
+  <author>
+    <name><![CDATA[Josh Matthews]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Managing Dotfiles With Git]]></title>
+    <link href="http://jmatthews.us/blog/2012/10/27/dots-pt1/"/>
+    <updated>2012-10-27T22:30:00-04:00</updated>
+    <id>http://jmatthews.us/blog/2012/10/27/dots-pt1</id>
+    <content type="html"><![CDATA[<h3>All the cool kids are doing it.</h3>
+
+<p>As a Linux user, one of the great things is how much everything on the system
+can be customized exactly to your liking, and how easy it is to do so through
+(usually) simple plain-text config files. One not-so-great thing is having to
+copy those files around whenever you get access to a new machine and want all
+your nice customizations on there too, or even worse, loosing all those careful
+tweaks in a system reinstall.</p>
+
+<p>Fortunately there is a better way. By using git to manage all your
+configuration files (&ldquo;dotfiles&rdquo;, since they are usually prefixed with a <code>.</code>),
+you can store all your settings remotely and easily sync them across any number
+of computers. Even if you&rsquo;re fairly new to Linux and don&rsquo;t have much in the way
+of dotfiles, keeping whatever you do have in git is still a good idea because 1)
+Even if you don&rsquo;t have a lot now, you will eventually so might as well start
+early, and 2) No matter how little configuration you might have, having to
+retype it after a system reinstall is never fun, so keeping it in a safe place
+just makes sense. So with that in mind, lets get started.</p>
+
+<!-- more -->
+
+
+<p>Before we start, I&rsquo;m assuming you have git installed and a github account ready to
+go. If not, then you should register for a free account
+<a href="https://github.com/signup/free">here</a>. It&rsquo;s a great website for hosting your
+git repos, and if you&rsquo;re a student you can even get a few free private repos to
+store all your secrets. Once you create an account, just run through the super
+easy instructions to get git set up on your machine.</p>
+
+<p>To get started, go to your github and create a new repo name <em>dotfiles</em>, and
+clone it to your local machine. Now to start out, lets just add one file to the
+repo. If you have a bashrc, then I&rsquo;d recommend starting with that. Copy the file
+<code>.bashrc</code> from your home directory to <code>dotfiles/bashrc</code>. I&rsquo;m omitting the <code>.</code>
+on purpose in the repo, because having it hidden in a repository used for
+nothing but dotfiles doesn&rsquo;t make much sense. Once it&rsquo;s there you can add to the
+repo with <code>git add bashrc</code> and <code>git commit -m</code>adding bashrc.`. Finally, push
+the changes to github to access your bashrc from anywhere with an internet
+connection.</p>
+
+<p>So now you can take any other configuration files you have, add them to the
+repo, and pull them down to any other computers you use. Of course, now you have
+to copy all your files back into your home directory each time you pull down new
+changes. That, or you could use a shell script to create symlinks for each
+file so that whenever you run <code>git pull</code> you don&rsquo;t have to do any extra work.
+Just copy or download the following script into a file called <code>link.sh</code>, make it executable,
+and add it to the repo. Then whenever you add new files, just run <code>./link.sh</code>
+inside the repo to create matching symlinks in your home directory.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Create Dotfiles Symlinks (link.sh)</span> <a href='/downloads/code/dots-pt1/link.sh'>download</a></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#!/usr/bin/env bash</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Ignore certain files</span>
+</span><span class='line'><span class="nv">IGNORE</span><span class="o">=</span><span class="s2">&quot;link\.sh&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Get current directory</span>
+</span><span class='line'><span class="nv">DIR</span><span class="o">=</span><span class="s2">&quot;$( cd &quot;</span><span class="k">$(</span> dirname <span class="s2">&quot;${BASH_SOURCE[0]}&quot;</span> <span class="k">)</span><span class="s2">&quot; &amp;&amp; pwd )&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">echo</span> -e <span class="s2">&quot;\e[1;35mSymlinking config files:\e[m&quot;</span>
+</span><span class='line'><span class="k">for </span>file in <span class="k">$(</span>git ls-files | egrep -v <span class="nv">$IGNORE</span><span class="k">)</span>
+</span><span class='line'><span class="k">do</span>
+</span><span class='line'><span class="k">	if</span> <span class="o">[</span> <span class="s2">&quot;$(readlink ~/.$file)&quot;</span> !<span class="o">=</span> <span class="s2">&quot;$DIR/$file&quot;</span> <span class="o">]</span>
+</span><span class='line'>	<span class="k">then</span>
+</span><span class='line'><span class="k">		</span><span class="nb">echo</span> <span class="nv">$file</span>
+</span><span class='line'>		<span class="k">if </span><span class="nb">test</span> ! -d <span class="sb">`</span>dirname ~/.<span class="nv">$file</span><span class="sb">`</span>
+</span><span class='line'>		<span class="k">then</span>
+</span><span class='line'><span class="k">			</span>mkdir -p <span class="sb">`</span>dirname ~/.<span class="nv">$file</span><span class="sb">`</span>
+</span><span class='line'>		<span class="k">fi</span>
+</span><span class='line'><span class="k">		if </span><span class="nb">test</span> -h ~/.<span class="nv">$file</span>
+</span><span class='line'>		<span class="k">then</span>
+</span><span class='line'><span class="k">			</span>unlink ~/.<span class="nv">$file</span>
+</span><span class='line'>		<span class="k">fi</span>
+</span><span class='line'><span class="k">		</span>rm -rf ~/.<span class="nv">$file</span> 2&gt;&amp;1 &gt;/dev/null
+</span><span class='line'>		ln -sf <span class="nv">$DIR</span>/<span class="nv">$file</span> ~/.<span class="nv">$file</span>
+</span><span class='line'>	<span class="k">fi</span>
+</span><span class='line'><span class="k">done</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+]]></content>
+  </entry>
+  
+</feed>
