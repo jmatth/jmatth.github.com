@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Raspberry Pi | Josh Matthews]]></title>
-  <link href="http://jmatthews.us/blog/categories/raspberry-pi/atom.xml" rel="self"/>
-  <link href="http://jmatthews.us/"/>
-  <updated>2016-01-20T16:32:11-05:00</updated>
-  <id>http://jmatthews.us/</id>
+  <title><![CDATA[Category: raspberry pi | Josh Matthews]]></title>
+  <link href="http://jmatth.com/blog/categories/raspberry-pi/atom.xml" rel="self"/>
+  <link href="http://jmatth.com/"/>
+  <updated>2018-05-03T12:13:00-04:00</updated>
+  <id>http://jmatth.com/</id>
   <author>
     <name><![CDATA[Josh Matthews]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Raspberry Pi In The Dorm]]></title>
-    <link href="http://jmatthews.us/blog/2013/02/18/rpi-dorm/"/>
+    <link href="http://jmatth.com/blog/2013/02/18/rpi-dorm/"/>
     <updated>2013-02-18T12:00:00-05:00</updated>
-    <id>http://jmatthews.us/blog/2013/02/18/rpi-dorm</id>
+    <id>http://jmatth.com/blog/2013/02/18/rpi-dorm</id>
     <content type="html"><![CDATA[<h2>Using a Raspberry Pi single board computer as a dorm room command center.</h2>
 
 <p>Some time ago I bought a <a href="http://www.raspberrypi.org/">Raspberry Pi</a>, and once
@@ -47,8 +47,7 @@ jump by section:</p>
 
 <hr />
 
-<br />
-
+<p><br /></p>
 
 <h3><a id="tunnel"></a>Bypass Dorm NAT With a Reverse SSH Tunnel</h3>
 
@@ -78,8 +77,7 @@ reading this practices good security and would normally put a passphrase on
 their private key, right? ಠ_ಠ). For our purposes, lets name this new key
 <code>tun_rsa</code>:</p>
 
-<p><code>console bash
-you@raspberrypi: ~$ ssh-keygen
+<pre><code class="console bash">you@raspberrypi: ~$ ssh-keygen
 Generating public/private rsa key pair.
 Enter file in which to save the key (/home/you/.ssh/id_rsa): /home/you/.ssh/tun_rsa
 Enter passphrase (empty for no passphrase):
@@ -100,8 +98,9 @@ The key's randomart image is:
 |     o  . . .    |
 |      o=++.      |
 +-----------------+
-</code>
-Now, install the key on the proxy server with <code>ssh-copy-id -i .ssh/tun\_rsa.pub
+</code></pre>
+
+<p>Now, install the key on the proxy server with <code>ssh-copy-id -i .ssh/tun\_rsa.pub
 you@proxy</code>. For security, you should also add the commands
 <code>command="/bin/false",no-pty</code> in front of the key entry in authorized_keys on
 the proxy server, like so (key shortened for readability):</p>
@@ -117,14 +116,11 @@ towards.</p>
 <p>You should also add the following line to your ssh config file on the proxy
 server to prevent SSH from yelling at you for unrecognized keys:</p>
 
-<p>```text ~/.ssh/config
-Host localhost</p>
-
-<pre><code>StrictHostKeyChecking no
-UserKnownHostsFile /dev/null
-</code></pre>
-
-<p>```</p>
+<p><code>text ~/.ssh/config
+Host localhost
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+</code></p>
 
 <p>We&rsquo;re almost there, all that&rsquo;s left is a dependency and the shell script.
 Install the package <code>autossh</code> on your Pi with <code>sudo apt-get update &amp;&amp; sudo
@@ -132,7 +128,7 @@ apt-get install autossh</code>. This is a nifty little program that will attempt
 restart your ssh connections if they die. Last, copy the following shell script
 into the directory <code>/etc/network/if-up.d</code> and make it executable.</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Reverse SSH Tunnel (reverse_tun.sh)</span> <a href='/downloads/code/rpi-dorm/reverse_tun.sh'>download</a></figcaption>
+<p><figure class='code'><figcaption><span>Reverse SSH Tunnel (reverse_tun.sh)</span> <a href='/downloads/code/rpi-dorm/reverse_tun.sh'>download</a></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -171,7 +167,7 @@ into the directory <code>/etc/network/if-up.d</code> and make it executable.</p>
 </span><span class='line'><span class="c"># -S: control socket location, or none</span>
 </span><span class='line'>
 </span><span class='line'>su -c <span class="s2">&quot;autossh -f -N -q -i ${KEY} -R ${PORT}:localhost:22 -S none ${REMOTE_USER}@${HOST} -oControlMaster=no -oUserKnownHostsFile=/dev/null -oStrictHostKeyChecking=no&quot;</span> <span class="nv">$USER</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+</span></code></pre></td></tr></table></div></figure></p>
 
 <p>Change the variables at the top of the file to match your information. For the
 port number, you can choose anything above 1024 (only root can allocate ports
@@ -196,26 +192,22 @@ we first SSH into the server being used as a proxy, and then SSH from there into
 the Pi.  For example, if you choose <code>proxyhost</code> to host the tunnel on port
 <code>12345</code>, you would do something like:</p>
 
-<p><code>console bash
-you@laptop: ~$ ssh you@proxyhost
+<pre><code class="console bash">you@laptop: ~$ ssh you@proxyhost
 you@proxyhost's password: &lt;Enter Password&gt;
 you@proxyhost: ~$ ssh -p 12345 you@localhost
 you@localhost's password: &lt;Enter Raspberry Pi Password&gt;
 you@raspberrypi: ~$
-</code></p>
+</code></pre>
 
 <p>The second option is to define a proxy command in your local ssh config files to
 make the process of connecting to the Pi a bit more direct. Add these lines to
 the ssh config files on whichever machines you intend to remotely access the Pi
 from:</p>
 
-<p>```text ~/.ssh/config
-Host rpi.dorm</p>
-
-<pre><code>Proxycommand ssh you@proxyhost exec nc localhost 12345
-</code></pre>
-
-<p>```</p>
+<p><code>text ~/.ssh/config
+Host rpi.dorm
+    Proxycommand ssh you@proxyhost exec nc localhost 12345
+</code></p>
 
 <p>What this does is tell SSH to run <a href="http://linux.die.net/man/1/nc">netcat</a> on the
 proxy server to bridge the connections. You&rsquo;ll still need your login credentials
@@ -250,10 +242,9 @@ own power supply, you may need to use a powered USB hub, since the ports on the
 Pi don&rsquo;t seem adequate for drives that run on USB power alone. Next, create a
 directory where you wish to access the drive and mount it there, like so:</p>
 
-<p><code>console bash
-you@raspberrypi: ~$ sudo mkdir /nas
+<pre><code class="console bash">you@raspberrypi: ~$ sudo mkdir /nas
 you@raspberrypi: ~$ sudo mount /dev/sda1 /nas
-</code></p>
+</code></pre>
 
 <p>Replace the path <code>/nas</code> to your liking, and change <code>/dev/sda1</code> to the path to
 the partition you want to use.</p>
@@ -261,10 +252,10 @@ the partition you want to use.</p>
 <p>To have it mount automatically at boot, add the following line to the bottom of
 <code>/etc/fstab</code>:</p>
 
-<p><code>text
-/dev/sda1       /nas            ext4    exec,user,auto,rw 0       0
-</code>
-Again, be sure to change the paths if they&rsquo;re different on your system.</p>
+<pre><code class="text">/dev/sda1       /nas            ext4    exec,user,auto,rw 0       0
+</code></pre>
+
+<p>Again, be sure to change the paths if they&rsquo;re different on your system.</p>
 
 <p>Next, we need to install Samba, a program that will allow us to host directories
 as Windows share drives. Install it with <code>sudo apt-get install -y samba</code>. Once
@@ -274,19 +265,15 @@ uncomment the line that says <code>security = user</code>. This will make it use
 login information for accessing the network drive. Finally, go down to the
 bottom of the file and add this section:</p>
 
-<p>``` ini smb.conf
-[pi_nas]</p>
-
-<pre><code>comment = RPI NAS
-path = /nas
-valid users = @users
-force group = users
-create mask = 0660
-directory mask = 0771
-read only = no
+<pre><code class="ini smb.conf">[pi_nas]
+    comment = RPI NAS
+    path = /nas
+    valid users = @users
+    force group = users
+    create mask = 0660
+    directory mask = 0771
+    read only = no
 </code></pre>
-
-<p>```</p>
 
 <p>Obviously you should replace /nas with the path to your mountpoint if you used
 something different.</p>
@@ -331,10 +318,9 @@ from a client. First, you should start the daemon with <code>deluged</code>. Onc
 up, set a username and password you will use to login from the client with the
 following commands:</p>
 
-<p><code>bash
-mkdir -p ~/.config/deluge
+<pre><code class="bash">mkdir -p ~/.config/deluge
 echo "&lt;username&gt;:&lt;password&gt;:10" &gt;&gt; ~/.config/deluge
-</code></p>
+</code></pre>
 
 <p>The number <code>10</code> at the end means that you will have full control over the daemon
 from the client, username and password should be self explanatory. One word of
@@ -345,17 +331,15 @@ you don&rsquo;t normally use.</p>
 <p>Next, we want to ensure that remote access is in fact enabled. Run the command
 <code>deluge-console</code>, and once the interface loads enter the following command:</p>
 
-<p><code>text
-config -s allow_remote True
-</code></p>
+<pre><code class="text">config -s allow_remote True
+</code></pre>
 
 <p>You can then exit the console with <code>exit</code>, and restart the daemon with the new
 config with the commands:</p>
 
-<p><code>bash
-pkill deluged
+<pre><code class="bash">pkill deluged
 deluged
-</code></p>
+</code></pre>
 
 <p>So now we have a torrent daemon running that accepts remote access from client
 programs. To configure it the rest of the way, you <em>could</em> edit the (rather

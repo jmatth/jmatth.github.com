@@ -19,7 +19,7 @@ can be customized exactly to your &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://jmatthews.us/blog/2012/10/27/dots-pt1/">
+  <link rel="canonical" href="http://jmatth.com/blog/2012/10/27/dots-pt1/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -61,7 +61,7 @@ can be customized exactly to your &hellip;">
   
 <form action="http://google.com/search" method="get">
   <fieldset role="search">
-    <input type="hidden" name="q" value="site:jmatthews.us" />
+    <input type="hidden" name="q" value="site:jmatth.com" />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
@@ -96,7 +96,7 @@ can be customized exactly to your &hellip;">
   
 
 
-<time datetime="2012-10-27T22:30:00-04:00" pubdate data-updated="true">Oct 27<span>th</span>, 2012</time>
+<time datetime="2012-10-27T22:30:00-04:00" pubdate data-updated="true"></time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -189,20 +189,20 @@ inside the repo to create matching symlinks in your home directory.</p>
 </span><span class='line'><span class="nv">DIR</span><span class="o">=</span><span class="s2">&quot;$( cd &quot;</span><span class="k">$(</span> dirname <span class="s2">&quot;${BASH_SOURCE[0]}&quot;</span> <span class="k">)</span><span class="s2">&quot; &amp;&amp; pwd )&quot;</span>
 </span><span class='line'>
 </span><span class='line'><span class="nb">echo</span> -e <span class="s2">&quot;\e[1;35mSymlinking config files:\e[m&quot;</span>
-</span><span class='line'><span class="k">for </span>file in <span class="k">$(</span>git ls-files | egrep -v <span class="nv">$IGNORE</span><span class="k">)</span>
+</span><span class='line'><span class="k">for</span> file in <span class="k">$(</span>git ls-files <span class="p">|</span> egrep -v <span class="nv">$IGNORE</span><span class="k">)</span>
 </span><span class='line'><span class="k">do</span>
-</span><span class='line'><span class="k">  if</span> <span class="o">[</span> <span class="s2">&quot;$(readlink ~/.$file)&quot;</span> !<span class="o">=</span> <span class="s2">&quot;$DIR/$file&quot;</span> <span class="o">]</span>
+</span><span class='line'>  <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$(readlink ~/.$file)&quot;</span> !<span class="o">=</span> <span class="s2">&quot;$DIR/$file&quot;</span> <span class="o">]</span>
 </span><span class='line'>  <span class="k">then</span>
-</span><span class='line'><span class="k">      </span><span class="nb">echo</span> <span class="nv">$file</span>
-</span><span class='line'>      <span class="k">if </span><span class="nb">test</span> ! -d <span class="sb">`</span>dirname ~/.<span class="nv">$file</span><span class="sb">`</span>
+</span><span class='line'>      <span class="nb">echo</span> <span class="nv">$file</span>
+</span><span class='line'>      <span class="k">if</span> <span class="nb">test</span> ! -d <span class="sb">`</span>dirname ~/.<span class="nv">$file</span><span class="sb">`</span>
 </span><span class='line'>      <span class="k">then</span>
-</span><span class='line'><span class="k">          </span>mkdir -p <span class="sb">`</span>dirname ~/.<span class="nv">$file</span><span class="sb">`</span>
+</span><span class='line'>          mkdir -p <span class="sb">`</span>dirname ~/.<span class="nv">$file</span><span class="sb">`</span>
 </span><span class='line'>      <span class="k">fi</span>
-</span><span class='line'><span class="k">      if </span><span class="nb">test</span> -h ~/.<span class="nv">$file</span>
+</span><span class='line'>      <span class="k">if</span> <span class="nb">test</span> -h ~/.<span class="nv">$file</span>
 </span><span class='line'>      <span class="k">then</span>
-</span><span class='line'><span class="k">          </span>unlink ~/.<span class="nv">$file</span>
+</span><span class='line'>          unlink ~/.<span class="nv">$file</span>
 </span><span class='line'>      <span class="k">fi</span>
-</span><span class='line'><span class="k">      </span>rm -rf ~/.<span class="nv">$file</span> 2&gt;&amp;1 &gt;/dev/null
+</span><span class='line'>      rm -rf ~/.<span class="nv">$file</span> 2&gt;<span class="p">&amp;</span><span class="m">1</span> &gt;/dev/null
 </span><span class='line'>      ln -sf <span class="nv">$DIR</span>/<span class="nv">$file</span> ~/.<span class="nv">$file</span>
 </span><span class='line'>  <span class="k">fi</span>
 </span><span class='line'><span class="k">done</span>
@@ -230,7 +230,7 @@ inside the repo to create matching symlinks in your home directory.</p>
   
 
 
-<time datetime="2012-10-27T22:30:00-04:00" pubdate data-updated="true">Oct 27<span>th</span>, 2012</time>
+<time datetime="2012-10-27T22:30:00-04:00" pubdate data-updated="true"></time>
       
 
 <span class="categories">
@@ -244,7 +244,7 @@ inside the repo to create matching symlinks in your home directory.</p>
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jmatthews.us/blog/2012/10/27/dots-pt1/" data-via="" data-counturl="http://jmatthews.us/blog/2012/10/27/dots-pt1/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jmatth.com/blog/2012/10/27/dots-pt1/" data-via="" data-counturl="http://jmatth.com/blog/2012/10/27/dots-pt1/" >Tweet</a>
   
   
   
@@ -333,7 +333,7 @@ inside the repo to create matching symlinks in your home directory.</p>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2016 - Josh Matthews -
+  Copyright &copy; 2018 - Josh Matthews -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
@@ -345,8 +345,8 @@ inside the repo to create matching symlinks in your home directory.</p>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://jmatthews.us/blog/2012/10/27/dots-pt1/';
-        var disqus_url = 'http://jmatthews.us/blog/2012/10/27/dots-pt1/';
+        var disqus_identifier = 'http://jmatth.com/blog/2012/10/27/dots-pt1/';
+        var disqus_url = 'http://jmatth.com/blog/2012/10/27/dots-pt1/';
         var disqus_script = 'embed.js';
       
     (function () {

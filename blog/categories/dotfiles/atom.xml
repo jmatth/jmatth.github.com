@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: dotfiles | Josh Matthews]]></title>
-  <link href="http://jmatthews.us/blog/categories/dotfiles/atom.xml" rel="self"/>
-  <link href="http://jmatthews.us/"/>
-  <updated>2016-01-20T16:32:11-05:00</updated>
-  <id>http://jmatthews.us/</id>
+  <link href="http://jmatth.com/blog/categories/dotfiles/atom.xml" rel="self"/>
+  <link href="http://jmatth.com/"/>
+  <updated>2018-05-03T12:13:00-04:00</updated>
+  <id>http://jmatth.com/</id>
   <author>
     <name><![CDATA[Josh Matthews]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Solarized++]]></title>
-    <link href="http://jmatthews.us/blog/2014/06/15/solarized-plus-plus/"/>
-    <updated>2014-06-15T13:28:07-04:00</updated>
-    <id>http://jmatthews.us/blog/2014/06/15/solarized-plus-plus</id>
+    <link href="http://jmatth.com/blog/2014/06/15/solarized-plus-plus/"/>
+    <updated>2014-06-15T10:28:07-07:00</updated>
+    <id>http://jmatth.com/blog/2014/06/15/solarized-plus-plus</id>
     <content type="html"><![CDATA[<p>A long time ago, I ran across <a href="http://ethanschoonover.com/solarized">Solarized</a>,
 a very popular colorscheme for the terminal and most text editors. While my
 first reaction was something along the lines of &ldquo;Eww, blue background?&rdquo;, I
@@ -170,9 +170,9 @@ contrast) hacking.</p>
   
   <entry>
     <title type="html"><![CDATA[Managing Vim Python Plugins]]></title>
-    <link href="http://jmatthews.us/blog/2013/03/10/managing-vim-python-plugins/"/>
+    <link href="http://jmatth.com/blog/2013/03/10/managing-vim-python-plugins/"/>
     <updated>2013-03-10T16:30:00-04:00</updated>
-    <id>http://jmatthews.us/blog/2013/03/10/managing-vim-python-plugins</id>
+    <id>http://jmatth.com/blog/2013/03/10/managing-vim-python-plugins</id>
     <content type="html"><![CDATA[<h2>Conditionally installing the coolest new Vim plugins.</h2>
 
 <p>Anyone who uses Vim regularly is probably familiar with its ever growing list
@@ -201,14 +201,13 @@ on how to install Vundle on its github page, the short version is:</p>
 </ol>
 
 
-<p>```vim vimrc
-set nocompatible
-filetype off</p>
+<pre><code class="vim vimrc">set nocompatible
+filetype off
 
-<p>set rtp+=~/.vim/bundle/vundle/</p>
+set rtp+=~/.vim/bundle/vundle/
 
-<p>Bundle &lsquo;gmarik/vundle&rsquo;
-```</p>
+Bundle 'gmarik/vundle'
+</code></pre>
 
 <p>Don&rsquo;t worry about the <code>filetype off</code> part, we&rsquo;ll turn it back on after we define
 our bundles. If you keep your dotfiles in a git repo, you should also add that
@@ -219,17 +218,16 @@ available.</p>
 of fuzzy file searching, so as an example we&rsquo;ll install
 <a href="http://github.com/kien/ctrlp.vim">ctrlp</a></p>
 
-<p>```vim vimrc
-set nocompatible
-filetype off</p>
+<pre><code class="vim vimrc">set nocompatible
+filetype off
 
-<p>set rtp+=~/.vim/bundle/vundle/</p>
+set rtp+=~/.vim/bundle/vundle/
 
-<p>Bundle &lsquo;gmarik/vundle&rsquo;</p>
+Bundle 'gmarik/vundle'
 
-<p>&ldquo; Plugin bundles
-Bundle &lsquo;kien/ctrlp.vim&rsquo;
-```</p>
+" Plugin bundles
+Bundle 'kien/ctrlp.vim'
+</code></pre>
 
 <p>Now restart Vim or reload your vimrc and enter <code>:BundleInstall</code>. This should
 open a new window where you can see the progress as the new plugin is installed.</p>
@@ -243,25 +241,21 @@ have Python 2.6 or greater installed. The first requirement is easy, since you
 can check what features Vim has been compiled with by using the <code>has()</code> function
 in your vimrc:</p>
 
-<p>```vim vimrc
-set nocompatible
-filetype off</p>
+<pre><code class="vim vimrc">set nocompatible
+filetype off
 
-<p>set rtp+=~/.vim/bundle/vundle/</p>
+set rtp+=~/.vim/bundle/vundle/
 
-<p>Bundle &lsquo;gmarik/vundle&rsquo;</p>
+Bundle 'gmarik/vundle'
 
-<p>&ldquo; Plugin bundles
-Bundle &lsquo;kien/ctrlp.vim&rsquo;</p>
+" Plugin bundles
+Bundle 'kien/ctrlp.vim'
 
-<p>&ldquo; Python plugin bundles
-if has(&lsquo;python&rsquo;) || has(&lsquo;python3&rsquo;)</p>
-
-<pre><code>Bundle 'SirVer/ultisnips'
+" Python plugin bundles
+if has('python') || has('python3')
+    Bundle 'SirVer/ultisnips'
+endif
 </code></pre>
-
-<p>endif
-```</p>
 
 <p>Now when you run <code>:BundleInstall</code>, whether or not the plugin is installed will
 depend on what options Vim was compiled with. Unfortunately, this will not
@@ -270,29 +264,25 @@ versions of Python Vim could install this plugin and break. So the last thing we
 need is a way to check the Python version from inside of Vim. To do this we will
 set a variable directly in the Python interpreter:</p>
 
-<p>```vim vimrc
-set nocompatible
-filetype off</p>
+<pre><code class="vim vimrc">set nocompatible
+filetype off
 
-<p>set rtp+=~/.vim/bundle/vundle/</p>
+set rtp+=~/.vim/bundle/vundle/
 
-<p>Bundle &lsquo;gmarik/vundle&rsquo;</p>
+Bundle 'gmarik/vundle'
 
-<p>&ldquo; Plugin bundles
-Bundle &lsquo;kien/ctrlp.vim&rsquo;</p>
+" Plugin bundles
+Bundle 'kien/ctrlp.vim'
 
-<p>let s:python_ver = 0
+let s:python_ver = 0
 silent! python import sys, vim;
-\ vim.command(&ldquo;let s:python_ver=&rdquo;+&ldquo;&rdquo;.join(map(str,sys.version_info[0:3])))</p>
+\ vim.command("let s:python_ver="+"".join(map(str,sys.version_info[0:3])))
 
-<p>&ldquo; Python plugin bundles
-if (has(&lsquo;python&rsquo;) || has(&lsquo;python3&rsquo;)) &amp;&amp; s:python_ver >= 260</p>
-
-<pre><code>Bundle 'SirVer/ultisnips'
+" Python plugin bundles
+if (has('python') || has('python3')) &amp;&amp; s:python_ver &gt;= 260
+    Bundle 'SirVer/ultisnips'
+endif
 </code></pre>
-
-<p>endif
-```</p>
 
 <p>What this addition does is set the script variable <code>python_ver</code> to 0, and then
 attempts to run Python to change it to the full Python version. If we are in a
@@ -302,34 +292,27 @@ to 0, and won&rsquo;t pass the <code>&gt;= 260</code> check.</p>
 <p>Once last thing we can do is add some fallback plugins to be installed in case
 the system we&rsquo;re on doesn&rsquo;t meet the requirements for the new Python versions:</p>
 
-<p>```vim vimrc
-set nocompatible
-filetype off</p>
+<pre><code class="vim vimrc">set nocompatible
+filetype off
 
-<p>set rtp+=~/.vim/bundle/vundle/</p>
+set rtp+=~/.vim/bundle/vundle/
 
-<p>Bundle &lsquo;gmarik/vundle&rsquo;</p>
+Bundle 'gmarik/vundle'
 
-<p>&ldquo; Plugin bundles
-Bundle &lsquo;kien/ctrlp.vim&rsquo;</p>
+" Plugin bundles
+Bundle 'kien/ctrlp.vim'
 
-<p>let s:python_ver = 0
+let s:python_ver = 0
 silent! python import sys, vim;
-\ vim.command(&ldquo;let s:python_ver=&rdquo;+&ldquo;&rdquo;.join(map(str,sys.version_info[0:3])))</p>
+\ vim.command("let s:python_ver="+"".join(map(str,sys.version_info[0:3])))
 
-<p>&ldquo; Python plugin bundles
-if (has(&lsquo;python&rsquo;) || has(&lsquo;python3&rsquo;)) &amp;&amp; s:python_ver >= 260</p>
-
-<pre><code>Bundle 'SirVer/ultisnips'
+" Python plugin bundles
+if (has('python') || has('python3')) &amp;&amp; s:python_ver &gt;= 260
+    Bundle 'SirVer/ultisnips'
+else
+    Bundle 'garbas/vim-snipmate'
+endif
 </code></pre>
-
-<p>else</p>
-
-<pre><code>Bundle 'garbas/vim-snipmate'
-</code></pre>
-
-<p>endif
-```</p>
 
 <p>And there you have it. Now you can drop this config onto virtually any system
 and <code>:BundleInstall</code> will pull down the correct plugins. For adding plugins from
@@ -341,9 +324,9 @@ free to drop me a line in the comments if you run into trouble.</p>
   
   <entry>
     <title type="html"><![CDATA[Managing Dotfiles With Git]]></title>
-    <link href="http://jmatthews.us/blog/2012/10/27/dots-pt1/"/>
+    <link href="http://jmatth.com/blog/2012/10/27/dots-pt1/"/>
     <updated>2012-10-27T22:30:00-04:00</updated>
-    <id>http://jmatthews.us/blog/2012/10/27/dots-pt1</id>
+    <id>http://jmatth.com/blog/2012/10/27/dots-pt1</id>
     <content type="html"><![CDATA[<h3>All the cool kids are doing it.</h3>
 
 <p>As a Linux user, one of the great things is how much everything on the system
@@ -392,7 +375,7 @@ Just copy or download the following script into a file called <code>link.sh</cod
 and add it to the repo. Then whenever you add new files, just run <code>./link.sh</code>
 inside the repo to create matching symlinks in your home directory.</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Create Dotfiles Symlinks (link.sh)</span> <a href='/downloads/code/dots-pt1/link.sh'>download</a></figcaption>
+<p><figure class='code'><figcaption><span>Create Dotfiles Symlinks (link.sh)</span> <a href='/downloads/code/dots-pt1/link.sh'>download</a></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -428,24 +411,24 @@ inside the repo to create matching symlinks in your home directory.</p>
 </span><span class='line'><span class="nv">DIR</span><span class="o">=</span><span class="s2">&quot;$( cd &quot;</span><span class="k">$(</span> dirname <span class="s2">&quot;${BASH_SOURCE[0]}&quot;</span> <span class="k">)</span><span class="s2">&quot; &amp;&amp; pwd )&quot;</span>
 </span><span class='line'>
 </span><span class='line'><span class="nb">echo</span> -e <span class="s2">&quot;\e[1;35mSymlinking config files:\e[m&quot;</span>
-</span><span class='line'><span class="k">for </span>file in <span class="k">$(</span>git ls-files | egrep -v <span class="nv">$IGNORE</span><span class="k">)</span>
+</span><span class='line'><span class="k">for</span> file in <span class="k">$(</span>git ls-files <span class="p">|</span> egrep -v <span class="nv">$IGNORE</span><span class="k">)</span>
 </span><span class='line'><span class="k">do</span>
-</span><span class='line'><span class="k">	if</span> <span class="o">[</span> <span class="s2">&quot;$(readlink ~/.$file)&quot;</span> !<span class="o">=</span> <span class="s2">&quot;$DIR/$file&quot;</span> <span class="o">]</span>
+</span><span class='line'>	<span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$(readlink ~/.$file)&quot;</span> !<span class="o">=</span> <span class="s2">&quot;$DIR/$file&quot;</span> <span class="o">]</span>
 </span><span class='line'>	<span class="k">then</span>
-</span><span class='line'><span class="k">		</span><span class="nb">echo</span> <span class="nv">$file</span>
-</span><span class='line'>		<span class="k">if </span><span class="nb">test</span> ! -d <span class="sb">`</span>dirname ~/.<span class="nv">$file</span><span class="sb">`</span>
+</span><span class='line'>		<span class="nb">echo</span> <span class="nv">$file</span>
+</span><span class='line'>		<span class="k">if</span> <span class="nb">test</span> ! -d <span class="sb">`</span>dirname ~/.<span class="nv">$file</span><span class="sb">`</span>
 </span><span class='line'>		<span class="k">then</span>
-</span><span class='line'><span class="k">			</span>mkdir -p <span class="sb">`</span>dirname ~/.<span class="nv">$file</span><span class="sb">`</span>
+</span><span class='line'>			mkdir -p <span class="sb">`</span>dirname ~/.<span class="nv">$file</span><span class="sb">`</span>
 </span><span class='line'>		<span class="k">fi</span>
-</span><span class='line'><span class="k">		if </span><span class="nb">test</span> -h ~/.<span class="nv">$file</span>
+</span><span class='line'>		<span class="k">if</span> <span class="nb">test</span> -h ~/.<span class="nv">$file</span>
 </span><span class='line'>		<span class="k">then</span>
-</span><span class='line'><span class="k">			</span>unlink ~/.<span class="nv">$file</span>
+</span><span class='line'>			unlink ~/.<span class="nv">$file</span>
 </span><span class='line'>		<span class="k">fi</span>
-</span><span class='line'><span class="k">		</span>rm -rf ~/.<span class="nv">$file</span> 2&gt;&amp;1 &gt;/dev/null
+</span><span class='line'>		rm -rf ~/.<span class="nv">$file</span> 2&gt;<span class="p">&amp;</span><span class="m">1</span> &gt;/dev/null
 </span><span class='line'>		ln -sf <span class="nv">$DIR</span>/<span class="nv">$file</span> ~/.<span class="nv">$file</span>
 </span><span class='line'>	<span class="k">fi</span>
 </span><span class='line'><span class="k">done</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+</span></code></pre></td></tr></table></div></figure></p>
 ]]></content>
   </entry>
   

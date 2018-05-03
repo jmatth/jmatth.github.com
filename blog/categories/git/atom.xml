@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: git | Josh Matthews]]></title>
-  <link href="http://jmatthews.us/blog/categories/git/atom.xml" rel="self"/>
-  <link href="http://jmatthews.us/"/>
-  <updated>2016-01-20T16:32:11-05:00</updated>
-  <id>http://jmatthews.us/</id>
+  <link href="http://jmatth.com/blog/categories/git/atom.xml" rel="self"/>
+  <link href="http://jmatth.com/"/>
+  <updated>2018-05-03T12:13:00-04:00</updated>
+  <id>http://jmatth.com/</id>
   <author>
     <name><![CDATA[Josh Matthews]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Managing Dotfiles With Git]]></title>
-    <link href="http://jmatthews.us/blog/2012/10/27/dots-pt1/"/>
+    <link href="http://jmatth.com/blog/2012/10/27/dots-pt1/"/>
     <updated>2012-10-27T22:30:00-04:00</updated>
-    <id>http://jmatthews.us/blog/2012/10/27/dots-pt1</id>
+    <id>http://jmatth.com/blog/2012/10/27/dots-pt1</id>
     <content type="html"><![CDATA[<h3>All the cool kids are doing it.</h3>
 
 <p>As a Linux user, one of the great things is how much everything on the system
@@ -66,7 +66,7 @@ Just copy or download the following script into a file called <code>link.sh</cod
 and add it to the repo. Then whenever you add new files, just run <code>./link.sh</code>
 inside the repo to create matching symlinks in your home directory.</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Create Dotfiles Symlinks (link.sh)</span> <a href='/downloads/code/dots-pt1/link.sh'>download</a></figcaption>
+<p><figure class='code'><figcaption><span>Create Dotfiles Symlinks (link.sh)</span> <a href='/downloads/code/dots-pt1/link.sh'>download</a></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -102,24 +102,24 @@ inside the repo to create matching symlinks in your home directory.</p>
 </span><span class='line'><span class="nv">DIR</span><span class="o">=</span><span class="s2">&quot;$( cd &quot;</span><span class="k">$(</span> dirname <span class="s2">&quot;${BASH_SOURCE[0]}&quot;</span> <span class="k">)</span><span class="s2">&quot; &amp;&amp; pwd )&quot;</span>
 </span><span class='line'>
 </span><span class='line'><span class="nb">echo</span> -e <span class="s2">&quot;\e[1;35mSymlinking config files:\e[m&quot;</span>
-</span><span class='line'><span class="k">for </span>file in <span class="k">$(</span>git ls-files | egrep -v <span class="nv">$IGNORE</span><span class="k">)</span>
+</span><span class='line'><span class="k">for</span> file in <span class="k">$(</span>git ls-files <span class="p">|</span> egrep -v <span class="nv">$IGNORE</span><span class="k">)</span>
 </span><span class='line'><span class="k">do</span>
-</span><span class='line'><span class="k">	if</span> <span class="o">[</span> <span class="s2">&quot;$(readlink ~/.$file)&quot;</span> !<span class="o">=</span> <span class="s2">&quot;$DIR/$file&quot;</span> <span class="o">]</span>
+</span><span class='line'>	<span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$(readlink ~/.$file)&quot;</span> !<span class="o">=</span> <span class="s2">&quot;$DIR/$file&quot;</span> <span class="o">]</span>
 </span><span class='line'>	<span class="k">then</span>
-</span><span class='line'><span class="k">		</span><span class="nb">echo</span> <span class="nv">$file</span>
-</span><span class='line'>		<span class="k">if </span><span class="nb">test</span> ! -d <span class="sb">`</span>dirname ~/.<span class="nv">$file</span><span class="sb">`</span>
+</span><span class='line'>		<span class="nb">echo</span> <span class="nv">$file</span>
+</span><span class='line'>		<span class="k">if</span> <span class="nb">test</span> ! -d <span class="sb">`</span>dirname ~/.<span class="nv">$file</span><span class="sb">`</span>
 </span><span class='line'>		<span class="k">then</span>
-</span><span class='line'><span class="k">			</span>mkdir -p <span class="sb">`</span>dirname ~/.<span class="nv">$file</span><span class="sb">`</span>
+</span><span class='line'>			mkdir -p <span class="sb">`</span>dirname ~/.<span class="nv">$file</span><span class="sb">`</span>
 </span><span class='line'>		<span class="k">fi</span>
-</span><span class='line'><span class="k">		if </span><span class="nb">test</span> -h ~/.<span class="nv">$file</span>
+</span><span class='line'>		<span class="k">if</span> <span class="nb">test</span> -h ~/.<span class="nv">$file</span>
 </span><span class='line'>		<span class="k">then</span>
-</span><span class='line'><span class="k">			</span>unlink ~/.<span class="nv">$file</span>
+</span><span class='line'>			unlink ~/.<span class="nv">$file</span>
 </span><span class='line'>		<span class="k">fi</span>
-</span><span class='line'><span class="k">		</span>rm -rf ~/.<span class="nv">$file</span> 2&gt;&amp;1 &gt;/dev/null
+</span><span class='line'>		rm -rf ~/.<span class="nv">$file</span> 2&gt;<span class="p">&amp;</span><span class="m">1</span> &gt;/dev/null
 </span><span class='line'>		ln -sf <span class="nv">$DIR</span>/<span class="nv">$file</span> ~/.<span class="nv">$file</span>
 </span><span class='line'>	<span class="k">fi</span>
 </span><span class='line'><span class="k">done</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+</span></code></pre></td></tr></table></div></figure></p>
 ]]></content>
   </entry>
   
