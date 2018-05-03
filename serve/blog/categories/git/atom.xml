@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: git | Josh Matthews]]></title>
-  <link href="http://jmatthews.us/blog/categories/git/atom.xml" rel="self"/>
-  <link href="http://jmatthews.us/"/>
+  <link href="http://jmatth.com/blog/categories/git/atom.xml" rel="self"/>
+  <link href="http://jmatth.com/"/>
   <updated>2016-01-20T16:24:44-05:00</updated>
-  <id>http://jmatthews.us/</id>
+  <id>http://jmatth.com/</id>
   <author>
     <name><![CDATA[Josh Matthews]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Managing Dotfiles With Git]]></title>
-    <link href="http://jmatthews.us/blog/2012/10/27/dots-pt1/"/>
+    <link href="http://jmatth.com/blog/2012/10/27/dots-pt1/"/>
     <updated>2012-10-27T22:30:00-04:00</updated>
-    <id>http://jmatthews.us/blog/2012/10/27/dots-pt1</id>
+    <id>http://jmatth.com/blog/2012/10/27/dots-pt1</id>
     <content type="html"><![CDATA[<h3>All the cool kids are doing it.</h3>
 
 <p>As a Linux user, one of the great things is how much everything on the system

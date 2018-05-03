@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Josh Matthews]]></title>
-  <link href="http://jmatthews.us/atom.xml" rel="self"/>
-  <link href="http://jmatthews.us/"/>
+  <link href="http://jmatth.com/atom.xml" rel="self"/>
+  <link href="http://jmatth.com/"/>
   <updated>2016-01-20T16:24:44-05:00</updated>
-  <id>http://jmatthews.us/</id>
+  <id>http://jmatth.com/</id>
   <author>
     <name><![CDATA[Josh Matthews]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Solarized++]]></title>
-    <link href="http://jmatthews.us/blog/2014/06/15/solarized-plus-plus/"/>
+    <link href="http://jmatth.com/blog/2014/06/15/solarized-plus-plus/"/>
     <updated>2014-06-15T13:28:07-04:00</updated>
-    <id>http://jmatthews.us/blog/2014/06/15/solarized-plus-plus</id>
+    <id>http://jmatth.com/blog/2014/06/15/solarized-plus-plus</id>
     <content type="html"><![CDATA[<p>A long time ago, I ran across <a href="http://ethanschoonover.com/solarized">Solarized</a>,
 a very popular colorscheme for the terminal and most text editors. While my
 first reaction was something along the lines of &ldquo;Eww, blue background?&rdquo;, I
@@ -37,7 +37,7 @@ the future.</p>
 <h2>1. The &ldquo;Bright Black&rdquo; Terminal Color Is Invisible</h2>
 
 <div class="img-wrapper flex-content basic-alignment right">
-<img src="http://jmatthews.us/downloads/pictures/solarized_problems.png" title="This is not what the output should look like." alt="Bright black text invisible in solarized.">
+<img src="http://jmatth.com/downloads/pictures/solarized_problems.png" title="This is not what the output should look like." alt="Bright black text invisible in solarized.">
 <p>This is not what the output should look like.</p>
 </div>
 
@@ -89,7 +89,7 @@ vim. For some reason the <code>SignColumn</code> (where syntastic and other plug
 their marks) still uses the wrong color, so you also need to change line 657 to
 read <code>exe "hi! SignColumn"     .s:fmt_none   .s:fg_base0  .s:bg_base03</code>. You can
 download a copy with these modifications from
-<a href="http://jmatthews.us/downloads/code/solarized/solarized-mod.vim">here</a> if you&rsquo;d like. I&rsquo;ll leave it
+<a href="http://jmatth.com/downloads/code/solarized/solarized-mod.vim">here</a> if you&rsquo;d like. I&rsquo;ll leave it
 up to you to modify your terminal&rsquo;s colorscheme.</p>
 
 <h2>2. Switching Between The Light And Dark Palette Can Be Easier</h2>
@@ -101,7 +101,7 @@ the procedure for switching between the two is just a bit too much. Assuming
 you&rsquo;re using Solarized in a terminal you have to:</p>
 
 <div class="img-wrapper flex-content basic-alignment right">
-<img src="http://jmatthews.us/downloads/pictures/solarized_mixed.png" width="400" title="Terminal: Solarized Light, Vim: Solarized Dark" alt="Solarized light and dark palettes conflicting.">
+<img src="http://jmatth.com/downloads/pictures/solarized_mixed.png" width="400" title="Terminal: Solarized Light, Vim: Solarized Dark" alt="Solarized light and dark palettes conflicting.">
 <p>Terminal: Solarized Light, Vim: Solarized Dark</p>
 </div>
 
@@ -177,9 +177,9 @@ contrast) hacking.</p>
   
   <entry>
     <title type="html"><![CDATA[Managing Vim Python Plugins]]></title>
-    <link href="http://jmatthews.us/blog/2013/03/10/managing-vim-python-plugins/"/>
+    <link href="http://jmatth.com/blog/2013/03/10/managing-vim-python-plugins/"/>
     <updated>2013-03-10T16:30:00-04:00</updated>
-    <id>http://jmatthews.us/blog/2013/03/10/managing-vim-python-plugins</id>
+    <id>http://jmatth.com/blog/2013/03/10/managing-vim-python-plugins</id>
     <content type="html"><![CDATA[<h2>Conditionally installing the coolest new Vim plugins.</h2>
 
 <p>Anyone who uses Vim regularly is probably familiar with its ever growing list
@@ -403,9 +403,9 @@ free to drop me a line in the comments if you run into trouble.</p>
   
   <entry>
     <title type="html"><![CDATA[Raspberry Pi In The Dorm]]></title>
-    <link href="http://jmatthews.us/blog/2013/02/18/rpi-dorm/"/>
+    <link href="http://jmatth.com/blog/2013/02/18/rpi-dorm/"/>
     <updated>2013-02-18T12:00:00-05:00</updated>
-    <id>http://jmatthews.us/blog/2013/02/18/rpi-dorm</id>
+    <id>http://jmatth.com/blog/2013/02/18/rpi-dorm</id>
     <content type="html"><![CDATA[<h2>Using a Raspberry Pi single board computer as a dorm room command center.</h2>
 
 <p>Some time ago I bought a <a href="http://www.raspberrypi.org/">Raspberry Pi</a>, and once
@@ -543,7 +543,7 @@ apt-get install autossh</code>. This is a nifty little program that will attempt
 restart your ssh connections if they die. Last, copy the following shell script
 into the directory <code>/etc/network/if-up.d</code> and make it executable.</p>
 
-<figure class='code'><figcaption><span>Reverse SSH Tunnel (reverse_tun.sh)</span> <a href='http://jmatthews.us/downloads/code/rpi-dorm/reverse_tun.sh'>download</a></figcaption>
+<figure class='code'><figcaption><span>Reverse SSH Tunnel (reverse_tun.sh)</span> <a href='http://jmatth.com/downloads/code/rpi-dorm/reverse_tun.sh'>download</a></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -833,9 +833,9 @@ new mini dorm command center.</p>
   
   <entry>
     <title type="html"><![CDATA[Managing Dotfiles With Git]]></title>
-    <link href="http://jmatthews.us/blog/2012/10/27/dots-pt1/"/>
+    <link href="http://jmatth.com/blog/2012/10/27/dots-pt1/"/>
     <updated>2012-10-27T22:30:00-04:00</updated>
-    <id>http://jmatthews.us/blog/2012/10/27/dots-pt1</id>
+    <id>http://jmatth.com/blog/2012/10/27/dots-pt1</id>
     <content type="html"><![CDATA[<h3>All the cool kids are doing it.</h3>
 
 <p>As a Linux user, one of the great things is how much everything on the system
@@ -884,7 +884,7 @@ Just copy or download the following script into a file called <code>link.sh</cod
 and add it to the repo. Then whenever you add new files, just run <code>./link.sh</code>
 inside the repo to create matching symlinks in your home directory.</p>
 
-<figure class='code'><figcaption><span>Create Dotfiles Symlinks (link.sh)</span> <a href='http://jmatthews.us/downloads/code/dots-pt1/link.sh'>download</a></figcaption>
+<figure class='code'><figcaption><span>Create Dotfiles Symlinks (link.sh)</span> <a href='http://jmatth.com/downloads/code/dots-pt1/link.sh'>download</a></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>

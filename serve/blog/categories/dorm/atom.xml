@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Dorm | Josh Matthews]]></title>
-  <link href="http://jmatthews.us/blog/categories/dorm/atom.xml" rel="self"/>
-  <link href="http://jmatthews.us/"/>
+  <link href="http://jmatth.com/blog/categories/dorm/atom.xml" rel="self"/>
+  <link href="http://jmatth.com/"/>
   <updated>2016-01-20T16:24:44-05:00</updated>
-  <id>http://jmatthews.us/</id>
+  <id>http://jmatth.com/</id>
   <author>
     <name><![CDATA[Josh Matthews]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Raspberry Pi In The Dorm]]></title>
-    <link href="http://jmatthews.us/blog/2013/02/18/rpi-dorm/"/>
+    <link href="http://jmatth.com/blog/2013/02/18/rpi-dorm/"/>
     <updated>2013-02-18T12:00:00-05:00</updated>
-    <id>http://jmatthews.us/blog/2013/02/18/rpi-dorm</id>
+    <id>http://jmatth.com/blog/2013/02/18/rpi-dorm</id>
     <content type="html"><![CDATA[<h2>Using a Raspberry Pi single board computer as a dorm room command center.</h2>
 
 <p>Some time ago I bought a <a href="http://www.raspberrypi.org/">Raspberry Pi</a>, and once

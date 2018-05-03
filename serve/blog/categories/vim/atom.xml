@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: vim | Josh Matthews]]></title>
-  <link href="http://jmatthews.us/blog/categories/vim/atom.xml" rel="self"/>
-  <link href="http://jmatthews.us/"/>
+  <link href="http://jmatth.com/blog/categories/vim/atom.xml" rel="self"/>
+  <link href="http://jmatth.com/"/>
   <updated>2016-01-20T16:24:44-05:00</updated>
-  <id>http://jmatthews.us/</id>
+  <id>http://jmatth.com/</id>
   <author>
     <name><![CDATA[Josh Matthews]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Solarized++]]></title>
-    <link href="http://jmatthews.us/blog/2014/06/15/solarized-plus-plus/"/>
+    <link href="http://jmatth.com/blog/2014/06/15/solarized-plus-plus/"/>
     <updated>2014-06-15T13:28:07-04:00</updated>
-    <id>http://jmatthews.us/blog/2014/06/15/solarized-plus-plus</id>
+    <id>http://jmatth.com/blog/2014/06/15/solarized-plus-plus</id>
     <content type="html"><![CDATA[<p>A long time ago, I ran across <a href="http://ethanschoonover.com/solarized">Solarized</a>,
 a very popular colorscheme for the terminal and most text editors. While my
 first reaction was something along the lines of &ldquo;Eww, blue background?&rdquo;, I
@@ -170,9 +170,9 @@ contrast) hacking.</p>
   
   <entry>
     <title type="html"><![CDATA[Managing Vim Python Plugins]]></title>
-    <link href="http://jmatthews.us/blog/2013/03/10/managing-vim-python-plugins/"/>
+    <link href="http://jmatth.com/blog/2013/03/10/managing-vim-python-plugins/"/>
     <updated>2013-03-10T16:30:00-04:00</updated>
-    <id>http://jmatthews.us/blog/2013/03/10/managing-vim-python-plugins</id>
+    <id>http://jmatth.com/blog/2013/03/10/managing-vim-python-plugins</id>
     <content type="html"><![CDATA[<h2>Conditionally installing the coolest new Vim plugins.</h2>
 
 <p>Anyone who uses Vim regularly is probably familiar with its ever growing list
