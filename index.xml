@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>jmatth</title>
+    <link>https://jmatth.com/</link>
+    <description>Recent content on jmatth</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 29 Sep 2018 21:23:12 -0400</lastBuildDate>
+    
+	<atom:link href="https://jmatth.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>About Me</title>
+      <link>https://jmatth.com/about/</link>
+      <pubDate>Sat, 29 Sep 2018 21:23:12 -0400</pubDate>
+      
+      <guid>https://jmatth.com/about/</guid>
+      <description>Hi, my name is Josh and I&amp;rsquo;m a full stack developer with a preference for backend and devops work. I&amp;rsquo;m currently employed by MongoDB in New York. I studied computer science at Rutgers University from 2011-2015, during which time I also participated in the computer science club and worked on campus at Open System Solutions. I can be contacted at josh@{thisDomain}. If you want to send me PGP mail, my public key can be found on keybase.</description>
+    </item>
+    
+  </channel>
+</rss>

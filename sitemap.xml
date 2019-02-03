@@ -1,62 +1,26 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url>
-<loc>http://jmatth.com/blog/2014/06/15/solarized-plus-plus/</loc>
-<lastmod>2014-06-15T10:28:07-07:00</lastmod>
-</url>
-<url>
-<loc>http://jmatth.com/blog/2013/03/10/managing-vim-python-plugins/</loc>
-<lastmod>2013-03-10T16:30:00-04:00</lastmod>
-</url>
-<url>
-<loc>http://jmatth.com/blog/2013/02/18/rpi-dorm/</loc>
-<lastmod>2013-02-18T12:00:00-05:00</lastmod>
-</url>
-<url>
-<loc>http://jmatth.com/blog/2012/10/27/dots-pt1/</loc>
-<lastmod>2012-10-27T22:30:00-04:00</lastmod>
-</url>
-<url>
-<loc>http://jmatth.com/blog/archives/</loc>
-</url>
-<url>
-<loc>http://jmatth.com/blog/</loc>
-</url>
-<url>
-<loc>http://jmatth.com/</loc>
-</url>
-<url>
-<loc>http://jmatth.com/about/</loc>
-</url>
-<url>
-<loc>http://jmatth.com/blog/categories/git/</loc>
-</url>
-<url>
-<loc>http://jmatth.com/blog/categories/dotfiles/</loc>
-</url>
-<url>
-<loc>http://jmatth.com/blog/categories/raspberry-pi/</loc>
-</url>
-<url>
-<loc>http://jmatth.com/blog/categories/college/</loc>
-</url>
-<url>
-<loc>http://jmatth.com/blog/categories/dorm/</loc>
-</url>
-<url>
-<loc>http://jmatth.com/blog/categories/ssh/</loc>
-</url>
-<url>
-<loc>http://jmatth.com/blog/categories/vim/</loc>
-</url>
-<url>
-<loc>http://jmatth.com/blog/categories/python/</loc>
-</url>
-<url>
-<loc>http://jmatth.com/blog/categories/terminal/</loc>
-</url>
-<url>
-<loc>http://jmatth.com/resume.pdf</loc>
-<lastmod>2018-05-02T10:25:50-04:00</lastmod>
-</url>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://jmatth.com/about/</loc>
+    <lastmod>2018-09-29T21:23:12-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://jmatth.com/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://jmatth.com/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://jmatth.com/</loc>
+    <lastmod>2018-09-29T21:23:12-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
 </urlset>
