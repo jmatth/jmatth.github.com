@@ -1,4 +1,4 @@
-baseURL = "http://jmatth.com/"
+baseURL = "https://jmatth.com/"
 languageCode = "en-us"
 theme = "coder"
 title = "jmatth"
