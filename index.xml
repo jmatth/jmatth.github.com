@@ -1,24 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>jmatth</title>
     <link>https://jmatth.com/</link>
     <description>Recent content on jmatth</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 29 Sep 2018 21:23:12 -0400</lastBuildDate>
-    
-	<atom:link href="https://jmatth.com/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 03 May 2022 00:56:07 -0400</lastBuildDate>
+    <atom:link href="https://jmatth.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About Me</title>
       <link>https://jmatth.com/about/</link>
-      <pubDate>Sat, 29 Sep 2018 21:23:12 -0400</pubDate>
-      
+      <pubDate>Tue, 03 May 2022 00:56:07 -0400</pubDate>
       <guid>https://jmatth.com/about/</guid>
-      <description>Hi, my name is Josh and I&amp;rsquo;m a full stack developer with a preference for backend and devops work. I&amp;rsquo;m currently employed by MongoDB in New York. I studied computer science at Rutgers University from 2011-2015, during which time I also participated in the computer science club and worked on campus at Open System Solutions. I can be contacted at josh@{thisDomain}. If you want to send me PGP mail, my public key can be found on keybase.</description>
+      <description>&lt;p&gt;Hi, my name is Josh and I&amp;rsquo;m a full stack developer with a preference for backend&#xA;and devops work. I&amp;rsquo;m currently working on a project to help modernize the technology&#xA;in my favorite hobby, tabletop RPGs. You can read about it at &lt;a href=&#34;https://bringingfire.com&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;bringingfire.com&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;In the past I&amp;rsquo;ve been employed at MongoDB, where I worked on the Atlas cloud service.&lt;/p&gt;&#xA;&lt;p&gt;I studied computer science at Rutgers University from 2011-2015, during which time I&#xA;also participated in the computer science club and worked on campus at Open&#xA;System Solutions.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>
